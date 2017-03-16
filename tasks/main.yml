@@ -1,0 +1,18 @@
+---
+- name: Java
+  hosts: 127.0.0.1
+  remote_user: root
+  tasks:
+  
+  - name: Criação do repositorio java
+    action: shell echo 'deb http://sdlc-esd.oracle.com precise main' > /etc/apt/java
+ 
+  - name: Aceitar a licença java
+    action: shell echo 'oracle-java7-installer shared/accepted-oracle-license-v1-1 select true' | debconf-set-selections
+
+  - name: Adicionando chave do repositório
+    action: command apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
+
+  - name: Instalação Java 7
+    action: command apt install default-jre -y
+  
